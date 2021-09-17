@@ -14,22 +14,21 @@ while True:
     onRate = 0.176      # $0.176/kWh
     midRate = 0.119     # $0.119/kWh
 
-    tudCheck = False
+    tudCheck = False    # Boolean set to true when TUD is applied
 
-    # Get user input
     offKwh = float(input("Enter kwh during Off Peak period: "))
     if offKwh == 0.0:     # Program exit if Off Peak period usage = 0
         exit(0)
     onKwh = float(input("Enter kwh during On Peak period: "))
     midKwh = float(input("Enter kwh during Mid Peak period: "))
     seniorYN = input("Is owner senior?: ")
-    seniorYN = seniorYN.lower()
+    seniorYN = seniorYN.lower()     # Convert input seniorYN to lowercase
 
     elecCostGross = offKwh * offRate + onKwh * onRate + midKwh * midRate
 
     if offKwh + onKwh + midKwh < 400 and seniorYN == "n":       # Under 400 TU, not senior
         elecCostGross *= totalUsageDiscount
-        tudCheck = True
+        tudCheck = True     # True after applied TUD
     elif offKwh + onKwh + midKwh < 400 and seniorYN == "y":     # Under 400 TU, senior
         elecCostGross *= totalUsageDiscount * seniorDiscount
         tudCheck = True
